@@ -1,5 +1,6 @@
 <?php
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -13,4 +14,8 @@
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
+});
+
+$router->get('/db',function(){
+    return DB::table('users')->limit(10)->get();
 });
