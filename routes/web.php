@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Database\Connection;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -17,5 +18,10 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('/db',function(){
-    return DB::table('users')->limit(10)->get();
+    try {
+        DB::connection()->getPdo();
+        echo "Connected successfully to: " . DB::connection()->getDatabaseName();
+    } catch (\Exception $e) {
+        die("Could not connect to the database. Please check your configuration. error:" . $e );
+    }
 });
