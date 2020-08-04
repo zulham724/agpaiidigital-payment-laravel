@@ -17,6 +17,10 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->get('/path', function () use ($router) {
+    return base_path();
+});
+
 $router->get('/db',function(){
     try {
         DB::connection()->getPdo();
